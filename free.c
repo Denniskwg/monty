@@ -9,19 +9,15 @@ void free_av(char **array)
 	free(array);
 }
 
-void free_stack(stack_t **stack)
+void free_stack(stack_t *stack)
 {
-	stack_t *ptr;
+	stack_t *ptr, *next;
 
-	if (*stack == NULL)
-		return;
-	ptr = *stack;
-	while (ptr != NULL && ptr->next)
+	ptr = stack;
+	while (ptr != NULL)
 	{
-		*stack = ptr->next;
-		free(ptr->prev);
+		next = ptr->next;
 		free(ptr);
-		ptr = (*stack)->next;
+		ptr = next;
 	}
-	free(*stack);
 }

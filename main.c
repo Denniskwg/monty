@@ -53,7 +53,9 @@ int main(int ac, char **av)
 			else
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				free_stack(stack);
 				free(strings[i]);
+				free(strings);
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -61,8 +63,9 @@ int main(int ac, char **av)
 		i++;
 	}
 	fclose(ptr);
-	free_av(strings);
-	free_stack(&stack);
+	free(strings[i]);
+	free(strings);
+	free_stack(stack);
 	return (0);
 }
 
@@ -83,7 +86,10 @@ void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
 		temp->next = NULL;
 		*stack = temp;
 	}
-	(*stack)->prev = temp;
-	temp->next = *stack;
-	*stack = temp;
+	else
+	{
+		(*stack)->prev = temp;
+		temp->next = *stack;
+		*stack = temp;
+	}
 }

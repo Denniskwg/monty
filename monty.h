@@ -41,5 +41,5 @@ int calculate_words(char *);
 void push(stack_t **, unsigned int);
 void pall(stack_t **, unsigned int);
 void free_av(char **);
-void free_stack(stack_t **);
+void free_stack(stack_t *);
 #endif
