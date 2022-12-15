@@ -1,7 +1,7 @@
 #include "monty.h"
 #include <stdlib.h>
 
-void match_opcode(char *str, stack_t **stack, unsigned int line_number)
+void match_opcode(char *str, stack_t **stack, unsigned int line_number, FILE *ptr)
 {
 	instruction_t instructions[size] = {
 		{"push", push},
@@ -21,6 +21,9 @@ void match_opcode(char *str, stack_t **stack, unsigned int line_number)
 		if (instructions[k].opcode == NULL)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, str);
+			free_stack(*stack);
+			free(str);
+			fclose(ptr);
 			exit(EXIT_FAILURE);
 		}
 	}

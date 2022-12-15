@@ -35,7 +35,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 
 } instruction_t;
-void match_opcode(char *, stack_t **, unsigned int);
+void match_opcode(char *, stack_t **, unsigned int, FILE *);
 int is_integer(char *);
 int calculate_words(char *);
 void push(stack_t **, unsigned int);

@@ -3,8 +3,7 @@ int number = 0;
 int main(int ac, char **av)
 {
 	FILE *ptr;
-	char *string;
-	char *code, *num;
+	char *code, *num, *string;
 	int i = 0, j;
 	size_t n = 0;
 	unsigned int line_number = 0;
@@ -33,7 +32,7 @@ int main(int ac, char **av)
 			continue;
 		}
 		if (calculate_words(string) == 0 && (strcmp(string, "push") != 0))
-			match_opcode(string, &stack, line_number);
+			match_opcode(string, &stack, line_number, ptr);
 		else
 		{
 			code = strtok(string, " ");
@@ -41,7 +40,7 @@ int main(int ac, char **av)
 			if (is_integer(num))
 			{
 				number = atoi(num);
-				match_opcode(code, &stack, line_number);
+				match_opcode(code, &stack, line_number, ptr);
 			}
 			else
 			{
@@ -70,6 +69,7 @@ void push(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	if (temp == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed");
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	temp->n = number;
