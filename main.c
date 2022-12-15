@@ -3,14 +3,20 @@ int number = 0;
 int main(int ac, char **av)
 {
 	FILE *ptr;
-	char **strings = malloc(size * sizeof(char *));
+	char **strings;
 	char *code, *num;
 	int i = 0, j;
 	size_t n = 0;
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
 
-	strings[size - 1] = NULL;
+	strings = malloc(10 * sizeof(char *));
+	if (strings == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed");
+		exit(EXIT_FAILURE);
+	}
+	strings[9] = NULL;
 	if (ac == 1 || ac > 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -47,9 +53,11 @@ int main(int ac, char **av)
 			else
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				free(strings[i]);
 				exit(EXIT_FAILURE);
 			}
 		}
+		free(strings[i]);
 		i++;
 	}
 	fclose(ptr);

@@ -4,8 +4,8 @@ void free_av(char **array)
 {
 	int i;
 
-	for (i = 0; array[i]; i++ )
-		free( array[i] );
+	for (i = 0; array[i]; i++)
+		free(array[i]);
 	free(array);
 }
 
@@ -23,5 +23,5 @@ void free_stack(stack_t **stack)
 		free(ptr);
 		ptr = (*stack)->next;
 	}
-	free(stack);
+	free(*stack);
 }
