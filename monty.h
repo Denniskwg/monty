@@ -8,6 +8,13 @@
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO
  */
+#define size 50
+#define _GNU_SOURCE
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+extern int number;
 typedef struct stack_s
 {
 	int n;
@@ -28,4 +35,11 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 
 } instruction_t;
+void match_opcode(char *, stack_t **, unsigned int);
+int is_integer(char *);
+int calculate_words(char *);
+void push(stack_t **, unsigned int);
+void pall(stack_t **, unsigned int);
+void free_av(char **);
+void free_stack(stack_t **);
 #endif
