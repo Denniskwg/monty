@@ -3,20 +3,13 @@ int number = 0;
 int main(int ac, char **av)
 {
 	FILE *ptr;
-	char **strings;
+	char *string;
 	char *code, *num;
 	int i = 0, j;
 	size_t n = 0;
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
 
-	strings = malloc(10 * sizeof(char *));
-	if (strings == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed");
-		exit(EXIT_FAILURE);
-	}
-	strings[9] = NULL;
 	if (ac == 1 || ac > 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -29,21 +22,21 @@ int main(int ac, char **av)
 		fprintf(stderr, "Error: Can't open file %s\n", strtok(NULL, "/"));
 		exit(EXIT_FAILURE);
 	}
-	while ((getline(&strings[i], &n, ptr)) != -1)
+	while ((getline(&string, &n, ptr)) != -1)
 	{
 		line_number++;
-		j = strlen(strings[i]);
-		strings[i][j - 1] = '\0';
-		if (strlen(strings[i]) == 0)
+		j = strlen(string);
+		string[j - 1] = '\0';
+		if (strlen(string) == 0)
 		{
 			line_number--;
 			continue;
 		}
-		if (calculate_words(strings[i]) == 0 && (strcmp(strings[i], "push") != 0))
-			match_opcode(strings[i], &stack, line_number);
+		if (calculate_words(string) == 0 && (strcmp(string, "push") != 0))
+			match_opcode(string, &stack, line_number);
 		else
 		{
-			code = strtok(strings[i], " ");
+			code = strtok(string, " ");
 			num = strtok(NULL, " ");
 			if (is_integer(num))
 			{
@@ -53,18 +46,18 @@ int main(int ac, char **av)
 			else
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				free(string);
 				free_stack(stack);
-				free(strings[i]);
-				free(strings);
+				fclose(ptr);
 				exit(EXIT_FAILURE);
 			}
 		}
-		free(strings[i]);
+		free(string);
+		string = NULL;
 		i++;
 	}
 	fclose(ptr);
-	free(strings[i]);
-	free(strings);
+	free(string);
 	free_stack(stack);
 	return (0);
 }
