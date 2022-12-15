@@ -39,6 +39,7 @@ void match_opcode(char *, stack_t **, unsigned int, FILE *);
 int is_integer(char *);
 int calculate_words(char *);
 void push(stack_t **, unsigned int);
+void pint(stack_t **, unsigned int);
 void pall(stack_t **, unsigned int);
 void free_stack(stack_t *);
 #endif

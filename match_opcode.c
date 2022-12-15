@@ -6,6 +6,7 @@ void match_opcode(char *str, stack_t **stack, unsigned int line_number, FILE *pt
 	instruction_t instructions[size] = {
 		{"push", push},
 		{"pall", pall},
+		{"pint", pint},
 		{NULL, NULL}
 	};
 	int k = 0;

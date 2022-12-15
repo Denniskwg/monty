@@ -4,7 +4,7 @@ int main(int ac, char **av)
 {
 	FILE *ptr;
 	char *code, *num, *string;
-	int i = 0, j;
+	int i = 0, j, k;
 	size_t n = 0;
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
@@ -37,7 +37,8 @@ int main(int ac, char **av)
 		{
 			code = strtok(string, " ");
 			num = strtok(NULL, " ");
-			if (is_integer(num))
+			k = is_integer(num);
+			if (k)
 			{
 				number = atoi(num);
 				match_opcode(code, &stack, line_number, ptr);
