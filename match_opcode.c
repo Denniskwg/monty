@@ -8,6 +8,7 @@ void match_opcode(char *str, stack_t **stack, unsigned int line_number, FILE *pt
 		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
+		{"swap", swap},
 		{NULL, NULL}
 	};
 	int k = 0;
