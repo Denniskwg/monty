@@ -37,9 +37,7 @@ int main(int ac, char **av)
 		j = strlen(string);
 		string[j - 1] = '\0';
 		if (check_spaces(string) == 0)
-		{
 			continue;
-		}
 		if (calculate_words(string, ' ') == 0 && (strcmp(string, "push") != 0))
 			match_opcode(string, &stack, line_number, ptr);
 		else
@@ -47,7 +45,7 @@ int main(int ac, char **av)
 			code = strtok(string, " ");
 			num = strtok(NULL, " ");
 			k = is_integer(num);
-			if (strcmp(code, "pall") == 0 && !k)
+			if (!k && search(code))
 				match_opcode(code, &stack, line_number, ptr);
 			else if (k)
 			{

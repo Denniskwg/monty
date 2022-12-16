@@ -44,4 +44,5 @@ void pop(stack_t **, unsigned int);
 void pall(stack_t **, unsigned int);
 void free_stack(stack_t *);
 int check_spaces(char *);
+int search(char *);
 #endif
