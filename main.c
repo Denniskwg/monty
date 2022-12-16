@@ -36,7 +36,7 @@ int main(int ac, char **av)
 		line_number++;
 		j = strlen(string);
 		string[j - 1] = '\0';
-		if (strlen(string) == 0)
+		if (check_spaces(string) == 0)
 		{
 			continue;
 		}
