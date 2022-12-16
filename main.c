@@ -47,7 +47,9 @@ int main(int ac, char **av)
 			code = strtok(string, " ");
 			num = strtok(NULL, " ");
 			k = is_integer(num);
-			if (k)
+			if (strcmp(code, "pall") == 0 && !k)
+				match_opcode(code, &stack, line_number, ptr);
+			else if (k)
 			{
 				number = atoi(num);
 				match_opcode(code, &stack, line_number, ptr);
