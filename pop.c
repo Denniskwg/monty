@@ -10,5 +10,6 @@ void pop(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	ptr = *stack;
-	*stack = ptr->prev;
+	*stack = ptr->next;
+	free(ptr);
 }
