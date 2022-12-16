@@ -4,7 +4,7 @@ int search(char *str)
 {
 	int i = 0;
 	int j = 0;
-	char *opcodes[] = {"pint", "pall", "pop", "swap", "add", NULL};
+	char *opcodes[] = {"pint", "pall", "pop", "swap", "add", "nop", NULL};
 
 	while (opcodes[i] != NULL)
 	{
