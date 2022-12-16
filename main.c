@@ -3,7 +3,7 @@ int number = 0;
 int main(int ac, char **av)
 {
 	FILE *ptr;
-	char *code, *num, *string;
+	char *code, *num, *string, *file;
 	int i = 0, j, k;
 	size_t n = 0;
 	unsigned int line_number = 0;
@@ -17,8 +17,18 @@ int main(int ac, char **av)
 	ptr = fopen(av[1], "r");
 	if (ptr == NULL)
 	{
-		strtok(av[1], "/");
-		fprintf(stderr, "Error: Can't open file %s\n", strtok(NULL, "/"));
+		if ((k = calculate_words(av[1], '/')))
+		{
+			file = strtok(av[1], "/");
+			while (k)
+			{
+				k--;
+				file = strtok(NULL, "/");
+			}
+		}
+		else
+			file = av[1];
+		fprintf(stderr, "Error: Can't open file %s\n", file);
 		exit(EXIT_FAILURE);
 	}
 	while ((getline(&string, &n, ptr)) != -1)
@@ -30,7 +40,7 @@ int main(int ac, char **av)
 		{
 			continue;
 		}
-		if (calculate_words(string) == 0 && (strcmp(string, "push") != 0))
+		if (calculate_words(string, ' ') == 0 && (strcmp(string, "push") != 0))
 			match_opcode(string, &stack, line_number, ptr);
 		else
 		{
