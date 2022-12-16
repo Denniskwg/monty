@@ -28,7 +28,6 @@ int main(int ac, char **av)
 		string[j - 1] = '\0';
 		if (strlen(string) == 0)
 		{
-			line_number--;
 			continue;
 		}
 		if (calculate_words(string) == 0 && (strcmp(string, "push") != 0))
